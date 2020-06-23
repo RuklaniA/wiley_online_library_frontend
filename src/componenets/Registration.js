@@ -140,7 +140,7 @@ resetForm=()=>{
               this.form = c;
             }}
           >
-            {/* {!this.state.successful && ( */}
+            {!this.state.successful && (
               <div>
                 <div className="row">
                   <div className="col">
@@ -239,7 +239,7 @@ resetForm=()=>{
                     </button>
                 </div>
               </div>
-            {/* )} */}
+            )}
 
     {this.state.message && (
               <div className="form-group">
@@ -333,7 +333,7 @@ const isEqual = (value, props, state) => {
   const bothChanged = state.password[0].isChanged && state.confirmPassword[0].isChanged;
 
   if (bothChanged && bothUsed && state.password[0].value !== state.confirmPassword[0].value) {
-    return <div className="alert alert-danger">Passwords are not equal.</div>;
+    return <div className="alert alert-danger">Passwords are not matching</div>;
   }
 };
 
