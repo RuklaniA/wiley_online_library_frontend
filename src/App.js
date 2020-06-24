@@ -10,13 +10,11 @@ import LibrarianBoard from "./componenets/Librarian_Board";
 import UserBoard from "./componenets/User_Board";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
-
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
-  
 
     this.state = {
       showLibrarianBoard: false,
@@ -34,7 +32,7 @@ class App extends Component {
       this.setState({
         currentUser: user,
         showLibrarianBoard: user.roles.includes("ROLE_LIBRARIAN"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN")
+        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
       });
     }
   }
@@ -42,8 +40,6 @@ class App extends Component {
   logOut() {
     Auth_Service.logout();
   }
-
-
 
   render() {
     const { currentUser, showLibrarianBoard, showAdminBoard } = this.state;
@@ -60,14 +56,14 @@ class App extends Component {
                   Home
                 </Link>
               </li>
-              
-            {showLibrarianBoard && (
-              <li className="nav-item">
-                <Link to={"/librarian"} className="nav-link">
-                  Librarian_Board Board
-                </Link>
-              </li>
-            )}
+
+              {showLibrarianBoard && (
+                <li className="nav-item">
+                  <Link to={"/librarian"} className="nav-link">
+                    Librarian_Board
+                  </Link>
+                </li>
+              )}
 
               {showAdminBoard && (
                 <li className="nav-item">
@@ -99,7 +95,7 @@ class App extends Component {
                   </a>
                 </li>
               </div>
-            ) : ( 
+            ) : (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link to={"/login"} className="nav-link">
@@ -113,22 +109,18 @@ class App extends Component {
                   </Link>
                 </li>
               </div>
-           
-          
             )}
           </nav>
 
-          {/* <div className="container mt-3"> */}
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/register" component={Registration} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/profile" component={Profile} />
-              <Route path="/admin" component={AdminBoard} />
-              <Route path="/librarian" component={LibrarianBoard} />
-              <Route path="/user" component={UserBoard} />
-            </Switch>
-          {/* </div> */}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/register" component={Registration} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profile" component={Profile} />
+            <Route path="/admin" component={AdminBoard} />
+            <Route path="/librarian" component={LibrarianBoard} />
+            <Route path="/user" component={UserBoard} />
+          </Switch>
         </div>
       </Router>
     );

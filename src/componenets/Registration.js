@@ -5,7 +5,6 @@ import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import Auth_Service from "../services/Auth_Service";
 
-
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +15,10 @@ class Registration extends Component {
       username: "",
       email: "",
       password: "",
-      confirmPassword:"",
+      confirmPassword: "",
       successful: false,
       message: "",
-      processing:false
+      processing: false,
     };
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.onChangeFirstName = this.onChangeFirstName.bind(this);
@@ -27,21 +26,21 @@ class Registration extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangeConfirmPassword=this.onChangeConfirmPassword.bind(this);
+    this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
   }
-resetForm=()=>{
-  this.setState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword:"",
-    successful: false,
-    message: "",
-    processing:false
-  })
-}
+  resetForm = () => {
+    this.setState({
+      firstName: "",
+      lastName: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      successful: false,
+      message: "",
+      processing: false,
+    });
+  };
   onChangeFirstName(e) {
     this.setState({
       firstName: e.target.value,
@@ -72,38 +71,35 @@ resetForm=()=>{
     });
   }
 
-  onChangeConfirmPassword(e){ 
-   
-    this.setState({confirmPassword: e.target.value})
-
-    
+  onChangeConfirmPassword(e) {
+    this.setState({ confirmPassword: e.target.value });
   }
- 
+
   handleOnSubmit(e) {
     e.preventDefault();
-     
-   
+
     this.setState({
       message: "",
       successful: true,
-      processing:true
+      processing: true,
     });
 
- this.form.validateAll();
- if (this.checkBtn.context._errors.length === 0) {
-    Auth_Service.register(
+    this.form.validateAll();
+    if (this.checkBtn.context._errors.length === 0) {
+      Auth_Service.register(
         this.state.firstName,
         this.state.lastName,
         this.state.username,
         this.state.email,
-        this.state.password,
+        this.state.password
       ).then(
         (response) => {
           this.setState({
             message: response.data.message,
             successful: true,
-            processing:false
-          });        },
+            processing: false,
+          });
+        },
         (error) => {
           const resMessage =
             (error.response &&
@@ -115,14 +111,12 @@ resetForm=()=>{
           this.setState({
             successful: false,
             message: resMessage,
-            processing:false
+            processing: false,
           });
         }
       );
-    
     }
   }
-
 
   render() {
     return (
@@ -170,9 +164,9 @@ resetForm=()=>{
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="row">
-                    <div className="col">
+                  <div className="col">
                     <div className="form-group">
                       <label htmlFor="username">Username</label>
                       <Input
@@ -183,9 +177,9 @@ resetForm=()=>{
                         onChange={this.onChangeUsername}
                         validations={[required, validate_username]}
                       />
+                    </div>
                   </div>
-                  </div>
-                 <div className="col">
+                  <div className="col">
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
                       <Input
@@ -197,10 +191,10 @@ resetForm=()=>{
                         validations={[required, validate_email]}
                       />
                     </div>
-               </div>
-               </div>
-                 <div className="row">
-                   <div className="col">
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
                     <div className="form-group">
                       <label htmlFor="password">Password</label>
                       <Input
@@ -209,39 +203,26 @@ resetForm=()=>{
                         name="password"
                         value={this.state.password}
                         onChange={this.onChangePassword}
-                        validations={[required, isEqual]}
+                        validations={[required]}
                       />
+                    </div>
                   </div>
-                  </div>
-                  <div className="col">
-                  <div className="form-group">
-                      <label htmlFor="confirmPassword"> Confirm Password</label>
-                      <Input
-                        type="password"
-                        className="form-control"
-                        name="confirmPassword"
-                        value={this.state.confirmPassword}
-                        onChange={this.onChangeConfirmPassword}
-                        validations={[required,isEqual]}
-                       
-                      />
-                      {/* {this.passwordMatch()} */}
-                  </div>
-               
                 </div>
-</div>
                 <div className="form-group">
-                  <button className="btn btn-primary btn-block"  disabled={this.state.loading}>
-                  {this.state.processing && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Sign Up</span>
-                    </button>
+                  <button
+                    className="btn btn-primary btn-block"
+                    disabled={this.state.loading}
+                  >
+                    {this.state.processing && (
+                      <span className="spinner-border spinner-border-sm"></span>
+                    )}
+                    <span>Sign Up</span>
+                  </button>
                 </div>
               </div>
             )}
 
-    {this.state.message && (
+            {this.state.message && (
               <div className="form-group">
                 <div
                   className={
@@ -254,7 +235,7 @@ resetForm=()=>{
                   {this.state.message}
                 </div>
               </div>
-            )} 
+            )}
             <CheckButton
               style={{ display: "none" }}
               ref={(c) => {
@@ -265,7 +246,7 @@ resetForm=()=>{
         </div>
       </div>
     );
-   }
+  }
 }
 
 /**
@@ -273,18 +254,6 @@ resetForm=()=>{
  *---------------- Validations----------------
  *
  */
-
-// const validate_confirmPassword = (password,value) => {
-  
-//   if (value !== password) {
-//     return(
-//           <div className="alert alert-danger" role="alert">
-//              Password is not matching
-//            </div>
-//     )
-//   }
-// }
-
 
 const validate_firstName = (value) => {
   if (value.length < 3 || value.length > 20) {
@@ -326,19 +295,6 @@ const validate_username = (value) => {
   }
 };
 
-
-
-const isEqual = (value, props, state) => {
-  const bothUsed = state.password[0].isUsed && state.confirmPassword[0].isUsed;
-  const bothChanged = state.password[0].isChanged && state.confirmPassword[0].isChanged;
-
-  if (bothChanged && bothUsed && state.password[0].value !== state.confirmPassword[0].value) {
-    return <div className="alert alert-danger">Passwords are not matching</div>;
-  }
-};
-
-
-
 const required = (value) => {
   if (!value) {
     return (
@@ -348,6 +304,5 @@ const required = (value) => {
     );
   }
 };
-
 
 export default Registration;

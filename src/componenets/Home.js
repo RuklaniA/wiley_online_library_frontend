@@ -29,19 +29,7 @@ class Home extends Component {
   }
 
   render() {
-    return (
-      <div className="home-layout">
-      {/* <div className="container"> 
-        <header className="jumbotron">  */}
-      
-        {/* </header> 
-     </div>  */}
-
-
-    
-
-      </div>
-    );
+    return <div className="home-layout"></div>;
   }
 }
 
